@@ -20,7 +20,7 @@ class Graph{
 		bool edgeExists(int firstVertex,int secondVertex) const;
 		void addVertex(int id);
 		std::vector<int> getVertices();
-		virtual void addEdge(int firstVertex, int secondVertex, int dist = 1);
+		virtual void addEdge(int firstVertex, int secondVertex);
 		bool isConnected() const;
 		void search(int firstVertex, int secondVertex) const;
 	    int minPath(int source,int target) const;

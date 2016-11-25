@@ -8,6 +8,7 @@ class WeightedGraph : virtual public Graph {
 		WeightedGraph();
 		WeightedGraph(unsigned n, bool isConnected);
 		void print(std::ostream& os) const;
+		void addEdge(int firstVertex, int secondVertex, int dist = 1);
 		int getWeight(int v, int w) const;
 	protected:
 	private:

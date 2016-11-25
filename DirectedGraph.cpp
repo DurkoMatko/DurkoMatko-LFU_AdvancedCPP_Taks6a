@@ -73,10 +73,10 @@ DirectedGraph::DirectedGraph(unsigned n, bool isConnected){
 }
 
 
-void DirectedGraph::addEdge(int firstVertex, int secondVertex, int dist){
+void DirectedGraph::addEdge(int firstVertex, int secondVertex){
 	try{
 		if(this->vertexExists(firstVertex) && this->vertexExists(secondVertex)){
-			adjacencyList.at(firstVertex).push_back(std::make_pair(secondVertex,dist));
+			adjacencyList.at(firstVertex).push_back(std::make_pair(secondVertex,1));
 			//adjacencyList.at(secondVertex).push_back(std::make_pair(firstVertex,dist));	
 		}
 		else{

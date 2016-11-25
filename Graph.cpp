@@ -190,7 +190,7 @@ std::vector<int> Graph::getVertices(){
 }
 
 //dist always = 1
-void Graph::addEdge(int firstVertex, int secondVertex, int dist){
+void Graph::addEdge(int firstVertex, int secondVertex){
 	try{
 		if(this->vertexExists(firstVertex) && this->vertexExists(secondVertex)){
 			adjacencyList.at(firstVertex).push_back(std::make_pair(secondVertex,1));

@@ -141,6 +141,7 @@ int main(){
 	Graph graph2 = directedWeighted;				//OK
 	Graph graph3 = weighted;						//OK
 	WeightedGraph weighted2 = directedWeighted;		//OK
+	WeightedGraph *tesst = new DirectedWeightedGraph(5,true);  //OK
 	//DirectedGraph directed2 = weighted;					//error
 	//DirectedGraph directed3 = directedWeighted;			//error
 	//WeightedGraph weighted3 = directed;					//error
@@ -199,6 +200,7 @@ int main(){
 
 	DirectedWeightedGraph directedWeighted3(7,true);
 	std::cout << directedWeighted3 <<std::endl;
+
 
 	return EXIT_SUCCESS;
 }
