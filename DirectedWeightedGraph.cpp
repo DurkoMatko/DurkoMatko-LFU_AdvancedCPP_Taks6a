@@ -7,6 +7,21 @@ DirectedWeightedGraph::DirectedWeightedGraph()
 }
 
 
+DirectedWeightedGraph::DirectedWeightedGraph(unsigned n, bool isConnected) : DirectedGraph(n, isConnected){
+	std::cout << "Derived directed & weighted graph constructor with parameters" <<std::endl;
+	//define random generator needed
+	std::random_device rd; // obtain a random number from hardware
+    std::mt19937 eng(rd()); // seed the generator
+	std::uniform_int_distribution<> distanceGenerator(1, 256);
+
+	//add random values to already existing edges
+	for(auto &nodeEdgesPair : adjacencyList){
+		for(auto &edge : nodeEdgesPair.second){
+			edge.second = distanceGenerator(eng);
+		}
+	}
+}
+
 void DirectedWeightedGraph::addEdge(int firstVertex, int secondVertex,int dist){
 	try{
 		if(this->vertexExists(firstVertex) && this->vertexExists(secondVertex)){
@@ -21,3 +36,5 @@ void DirectedWeightedGraph::addEdge(int firstVertex, int secondVertex,int dist){
 		std::cerr << "Out of Range error - addEdge(" << firstVertex << ", " << secondVertex << "," << dist << ") " << oor.what() <<  '\n';
 	}
 }
+
+

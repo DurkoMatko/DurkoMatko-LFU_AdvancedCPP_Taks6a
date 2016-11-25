@@ -62,6 +62,7 @@ Graph::Graph()
 
 Graph::Graph(unsigned n, bool isConnected)
 {
+	std::cout << "Base graph class constructor with parameters" << std::endl;
 	int vertex1,vertex2,dist,numberOfEdges;
 
 	//define random generators needed
@@ -101,27 +102,25 @@ Graph::Graph(unsigned n, bool isConnected)
 		}
 	}
 	//generate rest of edges (connected graph) resp. all edges(unconnected graph) randomly
-	else{
-	    while(numberOfEdges>0){
-	    	vertex1 = vertexChooser(eng);
-	    	vertex2 = vertexChooser(eng);
-	    	
-	        //while chosen vertex1 already has edges to all vertexes, choose new vertex1
-	    	while(adjacencyList.at(vertex1).size()==n-1){
-	    		vertex1 = vertexChooser(eng);
-	    	}
-	    	//vertexes of edge can't be the same one && edge can't already be in the graph
-	    	while(vertex1==vertex2  || this->edgeExists(vertex1,vertex2)){
-	    		vertex2 = vertexChooser(eng);
-	    	}
+    while(numberOfEdges>0){
+    	vertex1 = vertexChooser(eng);
+    	vertex2 = vertexChooser(eng);
+    	
+        //while chosen vertex1 already has edges to all vertexes, choose new vertex1
+    	while(adjacencyList.at(vertex1).size()==n-1){
+    		vertex1 = vertexChooser(eng);
+    	}
+    	//vertexes of edge can't be the same one && edge can't already be in the graph
+    	while(vertex1==vertex2  || this->edgeExists(vertex1,vertex2)){
+    		vertex2 = vertexChooser(eng);
+    	}
 
-	    	//add edge between 2 randomly chosen edges
-	    	this->addEdge(vertex1,vertex2);
+    	//add edge between 2 randomly chosen edges
+    	this->addEdge(vertex1,vertex2);
 
-	    	//decrement number of left edges to generate
-	    	numberOfEdges--;
-	    }
-	}
+    	//decrement number of left edges to generate
+    	numberOfEdges--;
+    }
 }
 
 //copy constructor
@@ -190,11 +189,12 @@ std::vector<int> Graph::getVertices(){
 	return vertices;
 }
 
-void Graph::addEdge(int firstVertex, int secondVertex){
+//dist always = 1
+void Graph::addEdge(int firstVertex, int secondVertex, int dist){
 	try{
 		if(this->vertexExists(firstVertex) && this->vertexExists(secondVertex)){
-			adjacencyList.at(firstVertex).push_back(std::make_pair(secondVertex,NULL));
-			adjacencyList.at(secondVertex).push_back(std::make_pair(firstVertex,NULL));	
+			adjacencyList.at(firstVertex).push_back(std::make_pair(secondVertex,1));
+			adjacencyList.at(secondVertex).push_back(std::make_pair(firstVertex,1));	
 		}
 		else{
 			throw std::out_of_range("Vertex does not exist");	
@@ -290,7 +290,7 @@ void Graph::search(int firstVertex,int secondVertex) const{
 }
 
 
-int Graph::minPath(int source,int target){
+int Graph::minPath(int source,int target) const{
 	//create map of minimal distances to all nodes
 	std::map<int,int> min_edgeCount;
 	for(const auto &listElement : adjacencyList){
@@ -314,8 +314,8 @@ int Graph::minPath(int source,int target){
 		//loop edges for current node
 		for (const auto &edge : adjacencyList.at(current)){
 			//if steps to current node + one more step < so far possible minSteps to inspected edge, then overwrite to new value
-			if( (min_edgeCount[current] + 1) < min_edgeCount[edge.first]){
-				min_edgeCount[edge.first] = min_edgeCount[current] + 1;
+			if( (min_edgeCount[current] + edge.second) < min_edgeCount[edge.first]){
+				min_edgeCount[edge.first] = min_edgeCount[current] + edge.second;
 				//insert or overwrite
 				active_vertices[edge.first] = min_edgeCount[edge.first];
 			}

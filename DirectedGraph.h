@@ -3,10 +3,11 @@
 
 #include "Graph.h"
 
-class DirectedGraph : public Graph {
+class DirectedGraph : virtual public Graph {
 	public:
 		DirectedGraph();
-		void addEdge(int firstVertex, int secondVertex);
+		DirectedGraph(unsigned n, bool isConnected);
+		void addEdge(int firstVertex, int secondVertex, int dist = 1);			//not weighted so distance = 1 (1 step)
 	protected:
 	private:
 };

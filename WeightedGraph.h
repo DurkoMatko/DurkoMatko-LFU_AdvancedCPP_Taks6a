@@ -3,13 +3,12 @@
 
 #include "Graph.h"
 
-class WeightedGraph : public Graph {
+class WeightedGraph : virtual public Graph {
 	public:
 		WeightedGraph();
+		WeightedGraph(unsigned n, bool isConnected);
 		void print(std::ostream& os) const;
-		void addEdge(int firstVertex, int secondVertex,int dist);
-		int getWeight(int v, int w);
-		int minPath(int source,int target);
+		int getWeight(int v, int w) const;
 	protected:
 	private:
 };

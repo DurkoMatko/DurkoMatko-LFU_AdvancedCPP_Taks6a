@@ -6,6 +6,8 @@
 #include <list>
 #include <map>
 #include <vector>
+#include <cstddef>
+#include <random>
 
 class Graph{
 	public:
@@ -18,10 +20,10 @@ class Graph{
 		bool edgeExists(int firstVertex,int secondVertex) const;
 		void addVertex(int id);
 		std::vector<int> getVertices();
-		virtual void addEdge(int firstVertex, int secondVertex);
+		virtual void addEdge(int firstVertex, int secondVertex, int dist = 1);
 		bool isConnected() const;
 		void search(int firstVertex, int secondVertex) const;
-		virtual int minPath(int source,int target);
+	    int minPath(int source,int target) const;
 		virtual void print(std::ostream& os) const;							//virtual print method to distinguish between weighted and non-weighted print (used by << operator defined in base Graph)
 		friend std::ostream& operator<<(std::ostream& os, const Graph& g);	//needs to be friend cuz it's defined outside of class and needs to access ajacencyList
 		friend std::ostream& operator<<(std::ostream& os, Graph& g);		//needs to be friend cuz it's defined outside of class and needs to access ajacencyList

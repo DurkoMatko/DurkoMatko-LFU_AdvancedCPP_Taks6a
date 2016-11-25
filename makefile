@@ -1,11 +1,11 @@
 CC = g++
-OBJECTS = Graph.o main.o WeightedGraph.o DirectedGraph.o DirectedWeightedGraph.o
+OBJECT_FILES = Graph.o main.o WeightedGraph.o DirectedGraph.o DirectedWeightedGraph.o
 CPPFLAGS = -std=c++11
 
 default : all
 all : GraphImplementation
 
-GraphImplementation: $(OBJECTS)
+GraphImplementation: $(OBJECT_FILES)
 	g++ -o $@ main.o 
 
 
@@ -14,4 +14,4 @@ GraphImplementation: $(OBJECTS)
 
 
 clean:
-	rm GraphImplementation $(OBJECTS)
+	rm GraphImplementation $(OBJECT_FILES)
